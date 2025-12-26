@@ -1,0 +1,3 @@
+We are hiring a Python developer with experience in Machine Learning,
+Natural Language Processing, and resume screening systems.
+Knowledge of TF-IDF and cosine similarity is required.

@@ -1,0 +1,3 @@
+Frontend Developer with skills in HTML, CSS, and JavaScript.
+Worked on responsive web design and UI development projects.
+No experience in machine learning or NLP.

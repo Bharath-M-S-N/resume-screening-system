@@ -1,0 +1,3 @@
+Python Developer specialized in Machine Learning and NLP.
+Built resume screening systems using TF-IDF and cosine similarity.
+Strong experience in preprocessing text data.
