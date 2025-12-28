@@ -12,6 +12,11 @@ STOPWORDS = {
 
 #cleans resume and job description before vectorization
 def clean_text(text):
+    """
+    Cleans and normalizes raw text input.
+    Removes unwanted characters, extra spaces, and formatting issues.
+    """
+
     text = text.lower()
     text = text.translate(str.maketrans("","",string.punctuation))
     text = re.sub(r"\d+","",text)
