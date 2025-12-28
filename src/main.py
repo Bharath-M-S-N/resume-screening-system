@@ -1,3 +1,5 @@
+#This is main file for the entire project
+
 import os
 from preprocessing import clean_text
 from vectorizer import vectorize_text
