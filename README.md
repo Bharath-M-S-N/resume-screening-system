@@ -72,22 +72,7 @@ The system computes cosine similarity scores and ranks resumes in descending ord
 
 ---
 
-## Project Structure
 
-resume-screening-system/
-|
-|-- data/
-|-- docs/
-|-- models/
-|-- src/
-|   |-- main.py
-|   |-- skills.py
-|   |-- experience.py
-|
-|-- requirements.txt
-|-- README.md
-
----
 
 ## How to Run
 
