@@ -39,6 +39,21 @@ def load_resume(path):
         print(f"⚠️ Skipping resume {os.path.basename(path)}:{e}")
         return None
     
+# Display the results    
+def print_results(results):
+    print("\n" + "=" * 60)
+    print("📄 RESUME SCREENING RESULTS")
+    print("=" * 60)
+
+    for rank, res in enumerate(results, start=1):
+        print(f"\n🏆 Rank {rank}")
+        print(f"Resume Name       : {res['resume']}")
+        print(f"Cosine Similarity : {res['cosine_score']}")
+        print(f"Skills Matched    : {', '.join(res['skills']) if res['skills'] else 'None'}")
+        print(f"Experience        : {res['experience_years']} years")
+        print(f"Experience Bonus  : {res['experience_bonus']}")
+        print(f"Final Score       : {res['final_score']}")
+        print("-" * 60)
 
 
 
@@ -110,17 +125,16 @@ def main():
         # Sort by Final Score
         results.sort(key=lambda x: x["final_score"], reverse=True)
 
-        # Display Results
-        print("\n📊 Resume Ranking Based on Job Description\n")
+        print_results(results)
+        top_candidate = results[0]
 
-        for rank, res in enumerate(results, start=1):
-            print(f"Rank {rank} -> {res['resume']}")
-            print(f"Cosine Score     : {res['cosine_score']}")
-            print(f"Skills Matche    : {res['skills']}")
-            print(f"Experience       : {res['experience_years']} years")
-            print(f"Experience Bonus : {res['experience_bonus']}")
-            print(f"Final Score       : {res['final_score']}")
-            print("-" * 40)
+        print("\n✅ SUMMARY")
+        print("=" * 60)
+        print(f"Best Match Resume : {top_candidate['resume']}")
+        print(f"Final Score      : {top_candidate['final_score']}")
+        print(f"Matched Skills   : {', '.join(top_candidate['skills']) if top_candidate['skills'] else 'None'}")
+        print(f"Experience       : {top_candidate['experience_years']} years")
+        print("=" * 60)
 
     except FileNotFoundError as e:
         print(f"\n❌ File Error: {e}")
