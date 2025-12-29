@@ -104,3 +104,35 @@ The system computes cosine similarity scores and ranks resumes in descending ord
 ## Project Status
 Completed up to experience-based scoring.
 Further enhancements planned.
+
+---
+
+## Why This Project Matters
+Resume screening is one of the most time-consuming tasks in recruitment.
+This project demonstrates how NLP techniques can automate candidate shortlisting.
+It reduces manual effort and improves hiring efficiency.
+The system is designed to be simple, scalable, and practical.
+
+---
+
+## Challenges Faced
+- Handling unstructured resume text
+- Extracting experience reliably using regex
+- Balancing similarity, skill, and experience scores
+- Preventing crashes due to missing or empty files
+
+---
+
+## Key Learnings
+- Practical application of TF-IDF and cosine similarity
+- Importance of modular and clean code design
+- Error handling for real-world data
+- Translating business problems into technical solutions
+
+---
+
+## How This Helps Recruiters
+- Faster initial screening
+- Objective ranking of candidates
+- Reduced human bias
+- Better focus on high-potential candidates
