@@ -1,0 +1,81 @@
+
+🚀 Resume Screening System Started
+
+⚠️ Skipping resume resumeEmpty.txt:Error reading file ../data\resumeEmpty.txt: File is empty
+⚠️ Skipping empty or invalid resume: resumeEmpty.txt
+
+============================================================
+📄 RESUME SCREENING RESULTS
+============================================================
+
+🏆 Rank 1
+Resume Name       : resume2.txt
+Cosine Similarity : 0.441
+Skills Matched    : python, machine learning, nlp, cosine similarity   
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.641
+------------------------------------------------------------
+
+🏆 Rank 2
+Resume Name       : resume1.pdf
+Cosine Similarity : 0.332
+Skills Matched    : python, machine learning, nlp, cosine similarity   
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.532
+------------------------------------------------------------
+
+🏆 Rank 3
+Resume Name       : resume1.txt
+Cosine Similarity : 0.153
+Skills Matched    : python, machine learning, nlp, data analysis       
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.353
+------------------------------------------------------------
+
+🏆 Rank 4
+Resume Name       : resume.txt
+Cosine Similarity : 0.117
+Skills Matched    : python, machine learning, nlp, data analysis       
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.317
+------------------------------------------------------------
+
+🏆 Rank 5
+Resume Name       : resume1_1.txt
+Cosine Similarity : 0.081
+Skills Matched    : python, machine learning, nlp
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.231
+------------------------------------------------------------
+
+🏆 Rank 6
+Resume Name       : resume3.txt
+Cosine Similarity : 0.089
+Skills Matched    : machine learning, nlp
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.189
+------------------------------------------------------------
+
+🏆 Rank 7
+Resume Name       : resume2.pdf
+Cosine Similarity : 0.034
+Skills Matched    : None
+Experience        : 0 years
+Experience Bonus  : 0.0
+Final Score       : 0.034
+------------------------------------------------------------
+
+✅ SUMMARY
+============================================================
+Best Match Resume : resume2.txt
+Final Score      : 0.641
+Matched Skills   : python, machine learning, nlp, cosine similarity    
+Experience       : 0 years
+============================================================
+
