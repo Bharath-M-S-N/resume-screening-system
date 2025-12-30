@@ -4,3 +4,6 @@ __pycache__/
 .vscode/
 .idea/
 models/
+venv/
+.env/
+.DS_Store
