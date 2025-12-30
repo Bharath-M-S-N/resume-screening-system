@@ -88,3 +88,11 @@ Machine learning models can replace rule-based scoring.
 Multiple job descriptions can be supported.
 Database integration can be added for large-scale use.
 Advanced NLP embeddings can improve accuracy further.
+
+
+---
+
+## 11. Project Status
+Current version supports resume ranking using text similarity, skills, and experience.
+The system is modular and GitHub-ready.
+Future work includes UI integration and deployment as a web application.
