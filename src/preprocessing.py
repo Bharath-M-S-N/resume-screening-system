@@ -1,6 +1,10 @@
 import re
 import string
 
+"""
+Text preprocessing utilities for resume and job description cleaning.
+"""
+
 #This file handles text before vetorization
 
 STOPWORDS = {

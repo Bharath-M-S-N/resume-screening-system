@@ -1,9 +1,16 @@
+# Python
 __pycache__/
 *.pyc
-.env
-.vscode/
-.idea/
-models/
+*.pyo
+*.pyd
+
+# Virtual environments
 venv/
 .env/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
 .DS_Store

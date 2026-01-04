@@ -4,12 +4,12 @@ import tempfile
 import pandas as pd
 import zipfile
 
-from preprocessing import clean_text
-from vectorizer import vectorize_text
-from similarity import cosine_sim
-from pdf_reader import extract_text_from_pdf
-from skills import extract_skills, calculate_final_score
-from experience import extract_experience_years, experience_bonus
+from src.preprocessing import clean_text
+from src.vectorizer import vectorize_text
+from src.similarity import cosine_sim
+from src.pdf_reader import extract_text_from_pdf
+from src.skills import extract_skills, calculate_final_score
+from src.experience import extract_experience_years, experience_bonus
 
 # Streamlit Page Config
 st.set_page_config(page_title="Resume Screaning System", layout="wide")
