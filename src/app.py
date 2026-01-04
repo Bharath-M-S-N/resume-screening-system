@@ -28,6 +28,7 @@ job_file = st.file_uploader(
     )
 
 st.header("📂 Upload Resumes")
+st.caption("You can select multiple resume files at once (Ctrl + Click or Shift + Click).")
 
 resume_files = st.file_uploader(
     "Uplaod Resumes (PDF or TXT)",
@@ -35,8 +36,14 @@ resume_files = st.file_uploader(
      accept_multiple_files=True
      )
 
-# Helper fuctions
+# Show upload Feedback
+if resume_files:
+    st.success(f"✅ {len(resume_files)} resume(s) uploaded.")
+    with st.expander("📄 View uploaded resume names"):
+        for file in resume_files:
+            st.write("\u2022", file.name)
 
+# Helper fuctions
 def read_uploaded_txt(file):
     return file.read().decode("utf-8", errors="ignore")
 
@@ -57,15 +64,7 @@ run_button = st.button(
 
 if run_button:
 
-    if job_file is None:
-        st.warning("Please upload a job description.")
-        st.stop()
-
-    if not resume_files:
-        st.warning("Please upload at least one resume.")
-        st.stop()
-
-    with st.spinner("Analyzing resumes... Please wait ⏳"):
+    with st.spinner("⏳ Analyzing resumes, pleses wait..."):
 
         # Read and clean job description
         if job_file.name.endswith(".pdf"):
@@ -75,7 +74,7 @@ if run_button:
             job_text = read_uploaded_txt(job_file)
 
         if job_text.strip() == "":
-            st.error("Job description file is empty.")
+            st.error("❌ Job description file is empty.")
             st.stop()
     
         clean_job = clean_text(job_text)
@@ -92,20 +91,20 @@ if run_button:
                 else:
                     raw_text = read_uploaded_txt(resume)
                 
-                if raw_text.strip() == "":
-                    st.warning(f"⚠️ {resume.name} is empty and was skipped.")
+                if not raw_text.strip():
+                    st.warning(f"⚠️ {resume.name} is empty or unreadable and was skipped.")
                     continue
 
                 cleaned_text = clean_text(raw_text)
                 resumes.append(cleaned_text)
                 resumes_names.append(resume.name)
 
-            except Exception as e:
+            except Exception:
                 st.warning(f"⚠️ Could not read {resume.name}. Skipped.")
                 continue
 
         if not resumes:
-            st.error("No valid resumes found to process.")
+            st.error("❌ No valid resumes found to process.")
             st.stop()
 
         # TF-IDF Vectorization
@@ -135,6 +134,7 @@ if run_button:
         # Sort results
         results.sort(key=lambda X: X["Final Score"], reverse=True)
 
+    # Display results
     st.success("Analysis Complete!")
 
     st.markdown("## 📊 Resume Ranking Results")
