@@ -64,10 +64,12 @@ def extract_zip(zip_path):
 # Run Analsis
 process_disabled = not job_file or not resume_files
 
-run_button = st.button(
-    "🔍 Rank Resumes",
-    disabled=process_disabled
-)
+col1, col2, col3 = st.columns([2,1,2])
+with col2:
+    run_button = st.button(
+        "🔍 Rank Resumes",
+        disabled=process_disabled
+    )
 
 if run_button:
 
