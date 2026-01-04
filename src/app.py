@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import tempfile
 import pandas as pd
+import zipfile
 
 from preprocessing import clean_text
 from vectorizer import vectorize_text
@@ -23,16 +24,16 @@ st.header("📌 Upload Job Description")
 
 # File Uploads
 job_file = st.file_uploader(
-    "Upload Job Description (TXT or PDF)",
+    "✔️ Upload Job Description (TXT or PDF)",
     type=["txt", "pdf"]
     )
 
 st.header("📂 Upload Resumes")
-st.caption("You can select multiple resume files at once (Ctrl + Click or Shift + Click).")
+st.caption("✔️ Upload multiple PDF/txt files **OR** upload a ZIP containing resumes.")
 
 resume_files = st.file_uploader(
-    "Uplaod Resumes (PDF or TXT)",
-    type=["pdf","txt"],
+    "Uplaod Resumes",
+    type=["pdf","txt","zip"],
      accept_multiple_files=True
      )
 
@@ -53,6 +54,12 @@ def save_uploaded_file(uploaded_file):
     with open(file_path, "wb") as f:
         f.write(uploaded_file.read())
     return file_path
+
+def extract_zip(zip_path):
+    extract_dir = tempfile.mkdtemp()
+    with zipfile.ZipFile(zip_path,"r") as zip_ref:
+        zip_ref.extractall(extract_dir)
+    return extract_dir
 
 # Run Analsis
 process_disabled = not job_file or not resume_files
@@ -83,25 +90,54 @@ if run_button:
         resumes_names = []
 
         #Read resumes
-        for resume in resume_files:
-            try:
-                if resume.name.endswith(".pdf"):
-                    path = save_uploaded_file(resume)
-                    raw_text = extract_text_from_pdf(path)
-                else:
-                    raw_text = read_uploaded_txt(resume)
-                
-                if not raw_text.strip():
-                    st.warning(f"⚠️ {resume.name} is empty or unreadable and was skipped.")
+        for uploaded in resume_files:
+
+            # ZIP handling
+            if uploaded.name.endswith(".zip"):
+                zip_path = save_uploaded_file(uploaded)
+                extract_dir = extract_zip(zip_path)
+
+                for root, _, files in os.walk(extract_dir):
+                    for file in files:
+                        file_path = os.path.join(root, file)
+
+                        try:
+                            if file.lower().endswith(".pdf"):
+                                raw_text = extract_text_from_pdf(file_path)
+                            elif file.lower().endswith(".txt"):
+                                with open(file_path,"r",encoding="utf-8", errors="ignore") as f:
+                                    raw_text = f.read()
+                            else:
+                                continue
+
+                            if not raw_text.strip():
+                                continue
+
+                            resumes.append(clean_text(raw_text))
+                            resumes_names.append(file)
+
+                        except Exception:
+                            continue
+
+            else:
+                try:
+                    if uploaded.name.endswith(".pdf"):
+                        path = save_uploaded_file(uploaded)
+                        raw_text = extract_text_from_pdf(path)
+                    else:
+                        raw_text = read_uploaded_txt(uploaded)
+                    
+                    if not raw_text.strip():
+                        st.warning(f"⚠️ {uploaded.name} is empty or unreadable and was skipped.")
+                        continue
+
+                    cleaned_text = clean_text(raw_text)
+                    resumes.append(cleaned_text)
+                    resumes_names.append(uploaded.name)
+
+                except Exception:
+                    st.warning(f"⚠️ Could not read {uploaded.name}. Skipped.")
                     continue
-
-                cleaned_text = clean_text(raw_text)
-                resumes.append(cleaned_text)
-                resumes_names.append(resume.name)
-
-            except Exception:
-                st.warning(f"⚠️ Could not read {resume.name}. Skipped.")
-                continue
 
         if not resumes:
             st.error("❌ No valid resumes found to process.")
